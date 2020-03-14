@@ -1,7 +1,9 @@
-#include <Windows.h>
+#include <windows.h>
 #include <stdio.h>
 #include <plugin\yhook.h>
 #include "yhook_test.h"
+
+using namespace YPlugIn;
 
 int Plus(int x, int y);
 
@@ -9,7 +11,6 @@ int Plus(int x, int y);
 extern "C" __declspec(naked) void YInlineHookPorc()
 {
     printf("Enter YInlineHookPorc!\n");
-
     _asm    ret
 }
 
@@ -17,17 +18,14 @@ extern "C" __declspec(naked) void YInlineHookPorc()
 extern "C" __declspec(naked) void YInlineHookPorc2()
 {
     printf("Enter YInlineHookPorc2!\n");
-
-    _asm {
-        ret
-    }
+    _asm    ret
 }
 
 // Plus = ::GetModuleHandle(NULL) + 0x000536E0
 int Plus(int x, int y)
 {
     printf("Enter Plus!\n");
-	return x + y;
+    return x + y;
 }
 
 void YInlineHookTest()

@@ -2,6 +2,9 @@
 
 #include <stddef.h>
 
+namespace YPlugIn
+{
+
 class YInlineHook
 {
 public:
@@ -27,8 +30,8 @@ public:
 
     ~YInlineHook();
 
-    void Set(void *hookAddr, void *procAddr, size_t hookSize = 5);
-    void Get(void *&hookAddr, void *&procAddr, size_t &hookSize);
+    int Set(void *hookAddr, void *procAddr, size_t hookSize = 5);
+    void Get(void *&hookAddr, void *&procAddr, size_t &hookSize) const;
     int Load();
     int Unload();
 
@@ -42,3 +45,5 @@ protected:
 
     void   *_baseProc;
 };
+
+}

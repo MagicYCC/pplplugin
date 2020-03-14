@@ -2,6 +2,9 @@
 #include <string.h>
 #include <plugin\yhook.h>
 
+namespace YPlugIn
+{
+
 #pragma pack(push, 1)
 
 struct BaseProcCallScene
@@ -44,14 +47,21 @@ YInlineHook::~YInlineHook()
     Unload();
 }
 
-void YInlineHook::Set(void *hookAddr, void *procAddr, size_t hookSize/* = 5*/)
+int
+YInlineHook::Set(void *hookAddr, void *procAddr, size_t hookSize/* = 5*/)
 {
+    if(_baseProc)
+        return Loaded;
+
     _hookAddr   = hookAddr;
     _procAddr   = procAddr;
     _hookSize   = hookSize;
+
+    return Succ;
 }
 
-void YInlineHook::Get(void *&hookAddr, void *&procAddr, size_t &hookSize)
+void
+YInlineHook::Get(void *&hookAddr, void *&procAddr, size_t &hookSize) const
 {
     hookAddr    = _hookAddr;
     procAddr    = _procAddr;
@@ -160,4 +170,6 @@ int YInlineHook::LoadBaseProc()
     pRetJmp->_proc      = jmpAddr;
 
     return Succ;
+}
+
 }
