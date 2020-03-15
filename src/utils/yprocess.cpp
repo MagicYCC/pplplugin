@@ -9,7 +9,7 @@ using namespace std;
 #define PROCESS_MAX_COUNT   (1024)
 
 void YUTILS_CALL
-ProcessIdsByName(string name, vector<DWORD> &processIds)
+ProcessIdsByBaseName(string name, vector<DWORD> &processIds)
 {
     processIds.clear();
 
@@ -23,14 +23,14 @@ ProcessIdsByName(string name, vector<DWORD> &processIds)
         if(aProcesses[i])
         {
             string nameTmp;
-            ProcessNameByPid(aProcesses[i], nameTmp);
+            ProcessBaseNameByPid(aProcesses[i], nameTmp);
             if(name == nameTmp)
                 processIds.push_back(aProcesses[i]);
         }
 }
 
 void YUTILS_CALL
-ProcessIdByName(string name, DWORD &processId)
+ProcessIdByBaseName(string name, DWORD &processId)
 {
     processId = 0;
 
@@ -86,10 +86,28 @@ void YUTILS_CALL
 ProcessNameByPid(DWORD processId, string &name)
 {
     name.clear();
-    string baseName;
-    ProcessBaseNameByPid(processId, baseName);
+    char szProcessName[MAX_PATH] = { 0 };
 
-    name = strrchr(baseName.c_str(), '\\');
+    // Get a handle to the process.
+    HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION |
+                                    PROCESS_VM_READ,
+                                    FALSE, processId);
+
+    // Get the process name.
+    if(hProcess)
+    {
+        HMODULE hMod;
+        DWORD cbNeeded;
+        if (::EnumProcessModules(hProcess, &hMod, sizeof(hMod),
+                                 &cbNeeded))
+        {
+            ::GetModuleFileNameExA(hProcess, hMod, szProcessName,
+                                   sizeof(szProcessName)/sizeof(TCHAR));
+        }
+    }
+
+    name = szProcessName;
+    ::CloseHandle(hProcess);
 }
 
 }

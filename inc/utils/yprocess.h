@@ -6,10 +6,10 @@
 namespace YUtils
 {
 void YUTILS_CALL
-ProcessIdsByName(std::string name, std::vector<DWORD> &processIds);
+ProcessIdsByBaseName(std::string name, std::vector<DWORD> &processIds);
 
 void YUTILS_CALL
-ProcessIdByName(std::string name, DWORD &processId);
+ProcessIdByBaseName(std::string name, DWORD &processId);
 
 void YUTILS_CALL
 ProcessBaseNameByPid(DWORD processId, std::string &baseName);
