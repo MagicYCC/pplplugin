@@ -99,7 +99,7 @@ int YRemoteThreadInjection::Attach()
     _remoteModule = (HMODULE)exitCode;
 
     if(!::VirtualFreeEx(handle, pRemoteModulePath, VIRTUALALLOC_PAGESIZE,
-                        MEM_COMMIT))
+                        MEM_DECOMMIT))
     {
         ::CloseHandle(handle);
         return FreeRemoteMemErr;
