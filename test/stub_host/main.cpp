@@ -20,22 +20,22 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow)
     wndClass.hCursor        = LoadCursor(NULL, IDC_ARROW);
     wndClass.hbrBackground  = (HBRUSH)GetStockObject(WHITE_BRUSH);
     wndClass.lpszMenuName   = NULL;
-    wndClass.lpszClassName  = TEXT("GettingStarted");
+    wndClass.lpszClassName  = TEXT("StubHost");
 
     RegisterClass(&wndClass);
 
     hWnd = CreateWindow(
-        TEXT("GettingStarted"),   // window class name
-        TEXT("Getting Started"),  // window caption
-        WS_OVERLAPPEDWINDOW,      // window style
-        CW_USEDEFAULT,            // initial x position
-        CW_USEDEFAULT,            // initial y position
-        CW_USEDEFAULT,            // initial x size
-        CW_USEDEFAULT,            // initial y size
-        NULL,                     // parent window handle
-        NULL,                     // window menu handle
-        hInstance,                // program instance handle
-        NULL);                    // creation parameters
+        TEXT("StubHost"),       // window class name
+        TEXT("Stub Host"),      // window caption
+        WS_OVERLAPPEDWINDOW,    // window style
+        CW_USEDEFAULT,          // initial x position
+        CW_USEDEFAULT,          // initial y position
+        CW_USEDEFAULT,          // initial x size
+        CW_USEDEFAULT,          // initial y size
+        NULL,                   // parent window handle
+        NULL,                   // window menu handle
+        hInstance,              // program instance handle
+        NULL);                  // creation parameters
 
     ShowWindow(hWnd, iCmdShow);
     UpdateWindow(hWnd);
@@ -55,7 +55,8 @@ WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_CREATE:
-        OutputDebugPrintf("GettingStarted WM_CREATE!\n");
+        OutputDebugPrintf("StubHost WM_CREATE!\n");
+        break;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
