@@ -44,7 +44,7 @@ ProcessIdByBaseName(string name, DWORD &processId)
         if(aProcesses[i])
         {
             string nameTmp;
-            ProcessNameByPid(aProcesses[i], nameTmp);
+            ProcessBaseNameByPid(aProcesses[i], nameTmp);
             if(name == nameTmp)
             {
                 processId = aProcesses[i];
