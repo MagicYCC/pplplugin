@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\test\plugin\main.cpp" />
     <ClCompile Include="..\..\..\test\plugin\yhook_test.cpp" />
+    <ClCompile Include="..\..\..\test\plugin\yinjection_test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
