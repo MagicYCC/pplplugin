@@ -5,7 +5,7 @@
 
 using namespace YPlugIn;
 
-int Plus(int x, int y);
+static int Plus(int x, int y);
 
 // 从Plus + 3处开始hook
 extern "C" __declspec(naked) void YInlineHookPorc()
@@ -22,7 +22,7 @@ extern "C" __declspec(naked) void YInlineHookPorc2()
 }
 
 // Plus = ::GetModuleHandle(NULL) + 0x000536E0
-int Plus(int x, int y)
+static int Plus(int x, int y)
 {
     printf("Enter Plus!\n");
     return x + y;
