@@ -10,7 +10,7 @@ ThreadProc(LPVOID p)
 {
     for(; ; )
     {
-        OutputDebugPrintf("Stub Module Process Attached!\n");
+        OutputDebugPrintf("Stub Module Thread Execute!\n");
         Sleep(2000);
     }
 }
@@ -34,11 +34,13 @@ DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
     switch (fdwReason)
     {
     case DLL_PROCESS_ATTACH:
+        OutputDebugPrintf("Stub Module Process Attached!\n");
         Init();
         break;
-    case DLL_THREAD_ATTACH:
-    case DLL_THREAD_DETACH:
+    case DLL_THREAD_ATTACH: break;
+    case DLL_THREAD_DETACH: break;
     case DLL_PROCESS_DETACH:
+        OutputDebugPrintf("Stub Module Process Detached!\n");
         Destroy();
         break;
     default:
